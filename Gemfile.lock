@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     astrarium (0.1.0)
+      swe4r (~> 0.0.2)
 
 GEM
   remote: https://rubygems.org/
