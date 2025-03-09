@@ -6,9 +6,4 @@ require 'swe4r'
 
 module Astrarium
   class Error < StandardError; end
-
-  def self.hello
-    "Welcome to Astrarium! 🌟"
-  end
 end
-
