@@ -1,38 +1,53 @@
 # Astrarium
 
-TODO: Delete this and the text below, and describe your gem
+**Astrarium** is a Ruby gem for calculating planetary positions, house cusps, and planet-house placements using Swiss Ephemeris (`swe4r`).
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/astrarium`. To experiment with that code, run `bin/console` for an interactive prompt.
+---
 
 ## Installation
 
-TODO: Replace `UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG` with your gem name right after releasing it to RubyGems.org. Please do not do it earlier due to security reasons. Alternatively, replace this section with instructions to install your gem from git if you don't plan to release to RubyGems.org.
+Add to Gemfile:
 
-Install the gem and add to the application's Gemfile by executing:
-
-```bash
-bundle add UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
+```ruby
+gem 'astrarium', github: 'your-github-username/astrarium'
 ```
 
-If bundler is not being used to manage dependencies, install the gem by executing:
+Or install manually:
 
-```bash
-gem install UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
+```ruby
+gem install astrarium
 ```
 
 ## Usage
+```ruby
+require 'astrarium'
 
-TODO: Write usage instructions here
+## Inputs
+# UTC year, month, day, & hour (decimal)
+year, month, day = 1995, 7, 31
+hour = 11.75
 
-## Development
+latitude, longitude, altitude = 51.510357, -0.116773, 0
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+# Planetary signs
+Astrarium::Calculations.planet_signs(year, month, day, hour, latitude, longitude, altitude)
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+# House signs
+Astrarium::Calculations.house_signs(year, month, day, hour, latitude, longitude)
 
-## Contributing
+# Planets in houses
+Astrarium::Calculations.house_planets(year, month, day, hour, latitude, longitude, altitude)
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/astrarium. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/astrarium/blob/main/CODE_OF_CONDUCT.md).
+# Planetary longitudes
+Astrarium::Calculations.planet_longitudes(year, month, day, hour, latitude, longitude, altitude)
+
+# House longitudes
+Astrarium::Calculations.house_longitudes(year, month, day, hour, latitude, longitude)
+```
+
+## Notes
+Uses Placidus houses and sidereal Lahiri mode.
+Depends on swe4r gem (Swiss Ephemeris).
 
 ## License
 
