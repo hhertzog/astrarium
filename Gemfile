@@ -11,4 +11,4 @@ gem "rspec", "~> 3.0"
 
 gem "rubocop", "~> 1.21"
 
-gem 'swe4r', '~> 0.0.2'
+gem "swe4r", "~> 0.0.2"
