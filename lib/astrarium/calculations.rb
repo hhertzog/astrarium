@@ -2,6 +2,7 @@
 
 require "swe4r"
 
+# Module for calculating planetary positions, house cusps, and planet-house placements using Swiss Ephemeris.
 module Astrarium
   module Calculations
     SIGNS = %i[aries taurus gemini cancer leo virgo libra scorpio sagittarius capricorn aquarius pisces].freeze
@@ -18,27 +19,27 @@ module Astrarium
       pluto: Swe4r::SE_PLUTO
     }.freeze
 
-    def self.house_signs(year, month, day, hour, latitude, longitude)
-      longitudes = house_longitudes(year, month, day, hour, latitude, longitude)
+    def self.house_signs(year:, month:, day:, hour:, latitude:, longitude:)
+      longitudes = house_longitudes(year:, month:, day:, hour:, latitude:, longitude:)
 
       longitudes.each_with_object({}) do |house_with_longitude, hash|
         hash[house_with_longitude[0]] = SIGNS[(house_with_longitude[1] / 30.0).to_i]
       end
     end
 
-    def self.planet_signs(year, month, day, hour, latitude, longitude, altitude)
-      longitudes = planet_longitudes(year, month, day, hour, latitude, longitude, altitude)
+    def self.planet_signs(year:, month:, day:, hour:, latitude:, longitude:, altitude:)
+      longitudes = planet_longitudes(year:, month:, day:, hour:, latitude:, longitude:, altitude:)
 
       longitudes.each_with_object({}) do |planet_with_longitude, hash|
         hash[planet_with_longitude[0]] = SIGNS[(planet_with_longitude[1] / 30.0).to_i]
       end
     end
 
-    def self.house_planets(year, month, day, hour, latitude, longitude, altitude)
-      houses = house_signs(year, month, day, hour, latitude, longitude) # {1 => :libra, 2 => :scorpio, ...}
+    def self.house_planets(year:, month:, day:, hour:, latitude:, longitude:, altitude:)
+      houses = house_signs(year:, month:, day:, hour:, latitude:, longitude:) # {1 => :libra, 2 => :scorpio, ...}
       house_planets = houses.keys.each_with_object({}) { |i, hash| hash[i] = [] }
 
-      planet_signs(year, month, day, hour, latitude, longitude, altitude).each do |planet, sign|
+      planet_signs(year:, month:, day:, hour:, latitude:, longitude:, altitude:).each do |planet, sign|
         house = houses.key(sign)
         house_planets[house] << planet if house
       end
@@ -47,7 +48,7 @@ module Astrarium
       house_planets.transform_values { |planets| planets.empty? ? nil : planets }
     end
 
-    def self.house_longitudes(year, month, day, hour, latitude, longitude)
+    def self.house_longitudes(year:, month:, day:, hour:, latitude:, longitude:)
       jd = Swe4r.swe_julday(year, month, day, hour)
       houses = Swe4r.swe_houses(jd, latitude, longitude, "P")
 
@@ -56,7 +57,7 @@ module Astrarium
       end
     end
 
-    def self.planet_longitudes(year, month, day, hour, latitude, longitude, altitude)
+    def self.planet_longitudes(year:, month:, day:, hour:, latitude:, longitude:, altitude:)
       jd = Swe4r.swe_julday(year, month, day, hour)
 
       # Set the geographic location for topocentric positions

@@ -8,8 +8,9 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Hannah Hertzog"]
   spec.email         = ["hhertzog@gmail.com"]
 
-  spec.summary       = "A Ruby gem for calculating astrological planetary positions and house cusps using Swiss Ephemeris."
-  spec.description   = "Astrarium calculates planetary signs & longitudes, house cusps & longitudes, and planet-to-house placements using swe4r (Swiss Ephemeris wrapper)."
+  spec.summary       = "Calculates astrological planetary positions and house cusps using Swiss Ephemeris."
+  spec.description   = "Astrarium calculates planetary signs & longitudes, house cusps & longitudes, and planet-to-house
+placements using swe4r (Swiss Ephemeris wrapper)."
   spec.homepage      = "https://github.com/hhertzog/astrarium"
   spec.license       = "MIT"
   spec.required_ruby_version = ">= 3.1.0"
