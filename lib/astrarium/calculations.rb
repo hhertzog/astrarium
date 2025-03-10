@@ -2,8 +2,8 @@
 
 require "swe4r"
 
-# Module for calculating planetary positions, house cusps, and planet-house placements using Swiss Ephemeris.
 module Astrarium
+  # Module for calculating planetary positions, house cusps, and planet-house placements using Swiss Ephemeris.
   module Calculations
     SIGNS = %i[aries taurus gemini cancer leo virgo libra scorpio sagittarius capricorn aquarius pisces].freeze
     SWE4R_PLANETS = {
